@@ -25,8 +25,6 @@ export const register = async (req, res, next) => {
         if (existingUser) {
             return sendError(res, HTTP_STATUS.BAD_REQUEST, RESPONSE_MESSAGES.USER_EXISTS);
         }
-
-        // Allow role to be set only if provided and valid, otherwise default to 'user'
         const allowedRoles = ['user', 'admin'];
         const userRole = (role && allowedRoles.includes(role)) ? role : 'user';
 
