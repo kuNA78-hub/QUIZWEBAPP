@@ -7,8 +7,8 @@ import { HTTP_STATUS, RESPONSE_MESSAGES } from '../utils/constants.js';
 
 export const register = async (req, res, next) => {
     try {
-        const { username, email, password } = req.body;
-        
+        const { username, email, password, role } = req.body;
+
         if (!isValidEmail(email)) {
             return sendError(res, HTTP_STATUS.BAD_REQUEST, RESPONSE_MESSAGES.INVALID_EMAIL);
         }
@@ -20,16 +20,22 @@ export const register = async (req, res, next) => {
         if (!passwordValidation.isValid) {
             return sendError(res, HTTP_STATUS.BAD_REQUEST, passwordValidation.message);
         }
-        
+
         const existingUser = await User.findOne({ $or: [{ email }, { username }] });
         if (existingUser) {
             return sendError(res, HTTP_STATUS.BAD_REQUEST, RESPONSE_MESSAGES.USER_EXISTS);
         }
-    
-        const user = new User({ username, email, password });
+
+        // Allow role to be set only if provided and valid, otherwise default to 'user'
+        const allowedRoles = ['user', 'admin'];
+        const userRole = (role && allowedRoles.includes(role)) ? role : 'user';
+
+        const user = new User({ username, email, password, role: userRole });
         await user.save();
+
         const token = generateToken(user._id, user.role);
-        logInfo(`New user registered: ${email}`);
+        logInfo(`New user registered: ${email} with role ${user.role}`);
+
         return sendSuccess(res, HTTP_STATUS.CREATED, RESPONSE_MESSAGES.REGISTER_SUCCESS, {
             token,
             user: user.getPublicProfile()
@@ -39,6 +45,7 @@ export const register = async (req, res, next) => {
         next(error);
     }
 };
+
 export const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
@@ -61,6 +68,7 @@ export const login = async (req, res, next) => {
         next(error);
     }
 };
+
 export const getProfile = async (req, res, next) => {
     try {
         const user = await User.findById(req.userId);

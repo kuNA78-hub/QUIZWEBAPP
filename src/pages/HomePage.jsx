@@ -1,68 +1,80 @@
-/**
- * HOME PAGE
- * Landing page with hero section and call to action
- */
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import Navbar from '../components/Navbar';
+import { Navbar } from '../components/ui/navbar';
+import { NeoCard } from '../components/ui/NeoCard';
+import { NeoButton } from '../components/ui/NeoButton';
+import { Sparkle } from '../components/ui/Sparkle';
 
-const HomePage = () => {
+export default function HomePage() {
   const { isAuthenticated } = useAuth();
 
   return (
-    <div>
+    <>
       <Navbar />
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl font-bold text-gray-800 mb-4">
-            🎯 Test Your Knowledge
-          </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Challenge yourself with interactive quizzes on various topics.
-            Learn, compete, and track your progress!
-          </p>
-          
-          <div className="flex gap-4 justify-center">
-            <Link
-              to="/quizzes"
-              className="bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition"
-            >
-              Browse Quizzes
-            </Link>
-            {!isAuthenticated && (
-              <Link
-                to="/register"
-                className="bg-white text-indigo-600 px-8 py-3 rounded-lg text-lg font-semibold border-2 border-indigo-600 hover:bg-indigo-50 transition"
-              >
-                Get Started
-              </Link>
-            )}
+      <div className="min-h-screen font-sans text-black">
+        <div className="container mx-auto px-4 py-20 max-w-4xl text-center">
+          <div className="relative mb-16 inline-block">
+            <div className="bg-yellow-400 border-4 border-black px-8 py-4 md:px-12 md:py-6 rounded-[30px] -rotate-2 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)]">
+              <h1 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-none">
+                Test Your <br /> Knowledge
+              </h1>
+            </div>
+
+            <Sparkle className="absolute -top-8 -left-8 text-[#5c94ff] w-12 h-12 animate-pulse" />
+            <Sparkle className="absolute -bottom-6 -right-6 text-green-400 w-10 h-10 animate-bounce" />
+            <div className="absolute -right-12 top-0 bg-purple-500 text-white border-2 border-black rounded-full px-4 py-1 font-black text-xs uppercase rotate-12 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hidden md:block">
+              New Quizzes! ✨
+            </div>
           </div>
 
-          {/* Features Section */}
-          <div className="mt-20 grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-4xl mb-3">📚</div>
-              <h3 className="font-semibold text-lg mb-2">Multiple Topics</h3>
-              <p className="text-gray-600">Programming, Science, History, and more</p>
+          <NeoCard className="rounded-[45px] border-4 p-10 shadow-[14px_14px_0px_0px_rgba(0,0,0,1)] bg-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full -mr-16 -mt-16 border-4 border-black opacity-50"></div>
+            
+            <p className="relative z-10 text-xl md:text-2xl font-bold text-gray-700 mb-10 leading-relaxed">
+              Challenge yourself with <span className="underline decoration-[#5c94ff] decoration-4">interactive quizzes</span> across science, tech, history, and more!
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-6 relative z-10">
+              <Link to="/quizzes" className="w-full sm:w-auto">
+                <NeoButton 
+                  className="w-full sm:w-64 py-5 rounded-2xl bg-[#5c94ff] text-white text-xl font-black uppercase italic tracking-tighter shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:bg-blue-600"
+                >
+                  Browse Quizzes 
+                </NeoButton>
+              </Link>
+
+              {!isAuthenticated && (
+                <Link to="/register" className="w-full sm:w-auto">
+                  <NeoButton 
+                    className="w-full sm:w-64 py-5 rounded-2xl bg-green-400 text-black text-xl font-black uppercase italic tracking-tighter shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:bg-green-500"
+                  >
+                    Get Started
+                  </NeoButton>
+                </Link>
+              )}
+
+              {isAuthenticated && (
+                <Link to="/dashboard" className="w-full sm:w-auto">
+                  <NeoButton 
+                    className="w-full sm:w-64 py-5 rounded-2xl bg-purple-500 text-white text-xl font-black uppercase italic tracking-tighter shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:bg-purple-600"
+                  >
+                    My Dashboard
+                  </NeoButton>
+                </Link>
+              )}
             </div>
-            <div className="text-center">
-              <div className="text-4xl mb-3">📊</div>
-              <h3 className="font-semibold text-lg mb-2">Track Progress</h3>
-              <p className="text-gray-600">Monitor your scores and improvement</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl mb-3">🏆</div>
-              <h3 className="font-semibold text-lg mb-2">Compete & Learn</h3>
-              <p className="text-gray-600">Challenge yourself and learn new things</p>
+          </NeoCard>
+          <div className="mt-12">
+            <div className="inline-flex items-center gap-3 bg-indigo-50 border-4 border-black px-6 py-2 rounded-full shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <span className="w-3 h-3 bg-green-400 border-2 border-black rounded-full animate-ping"></span>
+              <span className="font-black uppercase text-[10px] tracking-widest text-gray-500">
+                Join 5,000+ Students Today
+              </span>
             </div>
           </div>
+
         </div>
       </div>
-    </div>
+    </>
   );
-};
-
-export default HomePage;
+}
