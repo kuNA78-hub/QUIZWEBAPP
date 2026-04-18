@@ -1,4 +1,4 @@
-const API_URL = 'https://quizwebapp-s3g8.onrender.com'; 
-// const API_URL = import.meta.env.VITE_API_URL || '/api';
+// Hardcoded to your live Render backend
+export const API_BASE = 'https://quizwebapp-s3g8.onrender.com';
 export const TOKEN_KEY = 'token';
 export const USER_KEY = 'user';
