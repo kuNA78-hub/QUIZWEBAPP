@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { storage } from '../utils/storage';
 
-// Hardcode the full backend URL (including /api) – this is temporary to fix the 404
+// Hardcode the full backend URL (including /api) – this fixes the 404
 const API_URL = 'https://quizwebapp-s3g8.onrender.com/api';
 
 const api = axios.create({ baseURL: API_URL, timeout: 10000 });
