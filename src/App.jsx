@@ -15,6 +15,7 @@ import ResultsPage from './pages/ResultsPage';
 import LeaderboardPage from './pages/LeaderboardPage';
 import ProfilePage from './pages/ProfilePage';
 import ResultDetailPage from './pages/ResultDetailPage';
+import { API_BASE } from './utils/constants';
 
 function App() {
   return (
@@ -40,5 +41,5 @@ function App() {
     </BrowserRouter>
   );
 }
-console.log(" Backend URL from VITE_API_URL:", import.meta.env.VITE_API_URL);
+console.log(" Backend URL from VITE_API_URL:", import.meta.env.VITE_API_URL);console.log("API_BASE URL being used:", API_BASE);
 export default App;
