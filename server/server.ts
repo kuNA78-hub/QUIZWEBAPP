@@ -15,7 +15,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
-  'https://quizwebappfrontend-5rtdamiay.vercel.app',
+  'https://quizwebapplication-xi.vercel.app',   
+  'https://quizwebappfrontend-5rtdamiay.vercel.app', 
   process.env.FRONTEND_URL,
   'http://localhost:3000'
 ].filter((origin): origin is string => typeof origin === 'string' && origin.length > 0);
