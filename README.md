@@ -1,6 +1,6 @@
 # Quiz Web App
 
-A full-stack quiz application with role-based access (Admin/Student). Built with React (Vite), Node.js (Express), MongoDB Atlas, and deployed on Vercel + Render(https://quizwebappfrontend-5rtdamiay.vercel.app/).
+A full-stack quiz application with role-based access (Admin/Student). Built with React (Vite), Node.js (Express), MongoDB Atlas, and deployed on Vercel + Render(https://quizwebapplication-xi.vercel.app/).
 
 ## Features
 
