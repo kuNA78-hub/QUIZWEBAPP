@@ -4,6 +4,7 @@
   "type": "module",
   "main": "server.ts",
   "scripts": {
+    "build": "echo 'No build step required'",
     "start": "tsx server.ts",
     "dev": "tsx watch server.ts"
   },
