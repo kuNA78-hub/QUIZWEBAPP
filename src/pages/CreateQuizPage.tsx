@@ -41,7 +41,7 @@ export default function CreateQuizPage() {
   const navigate = useNavigate();
   const [quiz, setQuiz] = useState({
     title: '',
-    description: 'A comprehensive quiz about', // ✅ minimum 10 characters (backend requires ≥10)
+    description: 'A comprehensive quiz about', 
     category: 'General',
     difficulty: 'Medium',
     timeLimit: 30,
